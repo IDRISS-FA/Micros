@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    spec.ingressClassName: nginx
+spec:
+  rules:
+    - host: dialogapp.co
+      http:
+        paths:
+          - path: /project
+            pathType: Prefix
+            backend:
+              service:
+                name: project-srv-clusterip  # New format
+                port:
+                  number: 4500  # Must match service port
+          - path: /task
+            pathType: Prefix
+            backend:
+              service:
+                name: tasks-clusterip-srv  # New format
+                port:
+                  number: 4501

@@ -1,0 +1,16 @@
+{
+  "name": "tasks-service",
+  "version": "1.0.0",
+  "main": "Tasks.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Tasks.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
