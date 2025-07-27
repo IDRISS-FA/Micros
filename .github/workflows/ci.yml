@@ -40,8 +40,8 @@ jobs:
           context: ./Project-service
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/Project-service:latest
-            ${{ secrets.DOCKER_USERNAME }}/Project-service:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/project-service:latest
+            ${{ secrets.DOCKER_USERNAME }}/project-service:${{ github.sha }}
 
       - name: Build and Push Task Service
         if: github.ref == 'refs/heads/main'
@@ -50,5 +50,5 @@ jobs:
           context: ./Tasks-service
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/Tasks-service:latest
-            ${{ secrets.DOCKER_USERNAME }}/Tasks-service:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/tasks-service:latest
+            ${{ secrets.DOCKER_USERNAME }}/tasks-service:${{ github.sha }}
