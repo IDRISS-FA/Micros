@@ -13,14 +13,14 @@ jobs:
       
       # Test Project Service
       - name: Test Project Service
-        working-directory: ./Project-service
+        working-directory: ./project-service
         run: |
           npm ci
           npm test
 
       # Test Task Service
       - name: Test Task Service
-        working-directory: ./Tasks-service
+        working-directory: ./tasks-service
         run: |
           npm ci
           npm test
