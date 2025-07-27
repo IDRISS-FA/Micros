@@ -15,7 +15,7 @@ jobs:
       - name: Test Project Service
         working-directory: ./Project-service
         run: |
-          npm ci           # Strict install (uses package-lock.json)
+          npm ci
           npm test
 
       # Test Task Service
