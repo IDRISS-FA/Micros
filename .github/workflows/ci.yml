@@ -13,14 +13,14 @@ jobs:
       
       # Test Project Service
       - name: Test Project Service
-        working-directory: ./project-service
+        working-directory: ./Project-service
         run: |
           npm ci           # Strict install (uses package-lock.json)
           npm test
 
       # Test Task Service
       - name: Test Task Service
-        working-directory: ./task-service
+        working-directory: ./Tasks-service
         run: |
           npm ci
           npm test
@@ -37,18 +37,18 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v5
         with:
-          context: ./project-service
+          context: ./Project-service
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/project-service:latest
-            ${{ secrets.DOCKER_USERNAME }}/project-service:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/Project-service:latest
+            ${{ secrets.DOCKER_USERNAME }}/Project-service:${{ github.sha }}
 
       - name: Build and Push Task Service
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v5
         with:
-          context: ./task-service
+          context: ./Tasks-service
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/task-service:latest
-            ${{ secrets.DOCKER_USERNAME }}/task-service:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/Tasks-service:latest
+            ${{ secrets.DOCKER_USERNAME }}/Tasks-service:${{ github.sha }}
