@@ -1,0 +1,54 @@
+name: CI Pipeline
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test_and_build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      # Test Project Service
+      - name: Test Project Service
+        working-directory: ./project-service
+        run: |
+          npm ci           # Strict install (uses package-lock.json)
+          npm test
+
+      # Test Task Service
+      - name: Test Task Service
+        working-directory: ./task-service
+        run: |
+          npm ci
+          npm test
+
+      # Build Docker images (only on main branch)
+      - name: Login to Docker Hub
+        if: github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and Push Project Service
+        if: github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v5
+        with:
+          context: ./project-service
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/project-service:latest
+            ${{ secrets.DOCKER_USERNAME }}/project-service:${{ github.sha }}
+
+      - name: Build and Push Task Service
+        if: github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v5
+        with:
+          context: ./task-service
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/task-service:latest
+            ${{ secrets.DOCKER_USERNAME }}/task-service:${{ github.sha }}
