@@ -37,7 +37,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v5
         with:
-          context: ./Project-service
+          context: ./project-service
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/project-service:latest
@@ -47,7 +47,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v5
         with:
-          context: ./Tasks-service
+          context: ./tasks-service
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/tasks-service:latest
