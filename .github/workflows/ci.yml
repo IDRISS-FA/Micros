@@ -43,7 +43,8 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v5
         with:
-          context: ./project-service/Dockerfile-project
+          context: ./project-service
+          file: ./project-service/Dockerfile-project
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/project-service:latest
@@ -53,7 +54,8 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v5
         with:
-          context: ./tasks-service/Dockerfile-tasks
+          context: ./tasks-service
+          file: ./tasks-service/Dockerfile-tasks
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/tasks-service:latest
